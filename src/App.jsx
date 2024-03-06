@@ -1,7 +1,13 @@
 import "reactflow/dist/style.css"
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap } from "reactflow"
-import { useState } from "react";
 import { useCallback } from "react";
+import ReactFlow, {
+  MiniMap,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+} from 'reactflow';
 
 const initialNodes = [
   { id: "1", position: { x: 0, y: 0 }, data: { label: "1"} },
@@ -28,7 +34,11 @@ export default function App() {
         onConnect={onConnect}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-      />
+      >
+        <Controls />
+        <MiniMap />
+        <Background variant="dots" gap={12} size={1} />
+      </ReactFlow>
     </article>
   )
 }
