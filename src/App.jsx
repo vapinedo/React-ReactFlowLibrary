@@ -1,5 +1,5 @@
 import "reactflow/dist/style.css"
-import ReactFlow, { useNodesState, useEdgesState, addEdge } from "reactflow"
+import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap } from "reactflow"
 import { useState } from "react";
 import { useCallback } from "react";
 
@@ -12,8 +12,8 @@ const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 
 export default function App() {
 
-  const [nodes, setNodes, onNodesChange] = useState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -23,8 +23,8 @@ export default function App() {
   return (
     <article style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow 
-        nodes={initialNodes} 
-        edges={initialEdges} 
+        nodes={nodes} 
+        edges={edges} 
         onConnect={onConnect}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
